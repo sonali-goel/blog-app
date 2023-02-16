@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route,Routes } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store/store';
+import Blog from './components/Blog/Blog';
+import EditBlog from './components/EditBlog/EditBlog';
+import DeleteBlog from './components/DeleteBlog/DeleteBlog';
+import BlogContent from './components/BlogContent/BlogContent';
+import BlogForm from './components/Blog/BlogForm';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    
+    <Provider store={store}>
+      <Router>
+        <Routes>
+          <Route  path="/" element={<Blog />} />
+          <Route  path="/createBlog" element={<BlogForm />} />
+          <Route path="/:id" element={<BlogContent />} />
+          <Route  path="/edit/:id" element={<EditBlog  />} />
+          <Route  path="/delete/:id" element={<DeleteBlog  />} />
+        </Routes>
+      </Router>
+    </Provider>
+
   );
-}
+};
 
 export default App;
